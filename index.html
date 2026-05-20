@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>家計簿アプリ - Visual Analytics</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>家計簿アプリ</h1>
+        </header>
+
+        <!-- サマリーセクション -->
+        <section class="summary-container">
+            <div class="summary-card balance">
+                <h3>残高</h3>
+                <p id="total-balance">¥0</p>
+            </div>
+            <div class="summary-card income">
+                <h3>総収入</h3>
+                <p id="total-income">¥0</p>
+            </div>
+            <div class="summary-card expense">
+                <h3>総支出</h3>
+                <p id="total-expense">¥0</p>
+            </div>
+        </section>
+
+        <div class="main-content">
+            <!-- グラフセクション -->
+            <section class="chart-container">
+                <h2>支出内訳</h2>
+                <div class="canvas-wrapper">
+                    <canvas id="expense-chart"></canvas>
+                </div>
+            </section>
+
+            <!-- 入力フォームセクション -->
+            <section class="form-container">
+                <h2>項目を追加</h2>
+                <form id="record-form">
+                    <div class="form-group">
+                        <label for="date">日付</label>
+                        <input type="date" id="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="type">収支タイプ</label>
+                        <select id="type" required>
+                            <option value="expense">支出</option>
+                            <option value="income">収入</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="category">カテゴリ</label>
+                        <select id="category" required>
+                            <option value="食費">食費</option>
+                            <option value="日用品">日用品</option>
+                            <option value="交際費">交際費</option>
+                            <option value="固定費">固定費</option>
+                            <option value="趣味・娯楽">趣味・娯楽</option>
+                            <option value="交通費">交通費</option>
+                            <option value="その他">その他</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="description">内容</label>
+                        <input type="text" id="description" placeholder="例：スーパーでの買い物" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">金額</label>
+                        <input type="number" id="amount" placeholder="金額を入力" required min="0">
+                    </div>
+                    <button type="submit" class="btn-primary">保存する</button>
+                </form>
+            </section>
+        </div>
+
+        <!-- 履歴セクション -->
+        <section class="history-container">
+            <h2>履歴</h2>
+            <div class="table-responsive">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>日付</th>
+                            <th>カテゴリ</th>
+                            <th>内容</th>
+                            <th>金額</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody id="record-list">
+                        <!-- ここに動的に追加されます -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
